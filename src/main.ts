@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
-import { defineCustomElements } from "@apexui/web-components/loader";
+import { defineCustomElements } from "@corvaui/web-components/loader";
 import "zone.js";
 
 defineCustomElements();
@@ -19,7 +19,7 @@ const routes: Array<{ path: RoutePath; label: string; icon: string; title: strin
   { path: "/about", label: "About", icon: "info", title: "About" }
 ];
 
-const deploymentBaseSegment = "apexui-demo-angular";
+const deploymentBaseSegment = "corvaui-demo-angular";
 
 const routeRows = [
   { route: "North loop", owner: "Maya Chen", status: "Ready", risk: "Low", revenue: "$84K", sla: "96%" },
@@ -62,13 +62,13 @@ const serviceRecordColumns = [
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <main class="site-shell" [attr.data-apex-theme]="theme">
+    <main class="site-shell" [attr.data-corva-theme]="theme">
       <header class="site-header">
         <a class="brand-lockup" [href]="hrefFor('/')" (click)="navigate($event, '/')" aria-label="CorvaUI Angular demo home">
           <span class="brand-mark" aria-hidden="true"><img [attr.src]="assetHref('corvaui-raven-mark.svg')" alt="" /></span>
           <span>
-            <strong>CorvaUI</strong>
-            <small>Operations</small>
+            <strong>SignalGrid</strong>
+            <small>Critical operations</small>
           </span>
         </a>
 
@@ -79,117 +79,112 @@ const serviceRecordColumns = [
         </nav>
 
         <div class="header-actions">
-          <a class="action-link secondary compact-link" [href]="hrefFor('/customers')" (click)="navigate($event, '/customers')">Customer portal</a>
-          <a class="action-link primary compact-link" [href]="hrefFor('/work-orders')" (click)="navigate($event, '/work-orders')">Book service</a>
-          <apex-switch label="Dark" [checked]="isDark" (apexChange)="setTheme($event)"></apex-switch>
+          <a class="action-link secondary compact-link" [href]="hrefFor('/customers')" (click)="navigate($event, '/customers')">Tenant health</a>
+          <a class="action-link primary compact-link" [href]="hrefFor('/work-orders')" (click)="navigate($event, '/work-orders')">Open incident</a>
+          <corva-switch label="Dark" [checked]="isDark" (corvaChange)="setTheme($event)"></corva-switch>
         </div>
       </header>
 
       <div class="route-shell">
         <section class="route-panel" [attr.aria-label]="activeLabel + ' page'">
-          <apex-breadcrumbs [attr.items]="breadcrumbsJson"></apex-breadcrumbs>
+          <corva-breadcrumbs [attr.items]="breadcrumbsJson"></corva-breadcrumbs>
 
           <ng-container [ngSwitch]="activePath">
             <section *ngSwitchCase="'/'" class="route-page home-page">
               <section class="hero-page" aria-labelledby="home-title">
                 <div class="hero-copy">
-                  <apex-stack gap="lg">
-                    <apex-typography id="home-title" as="h1" variant="display">Field service that feels calm before the crew arrives.</apex-typography>
-                    <p>CorvaUI coordinates commercial maintenance, emergency dispatch, customer approvals, and executive reporting from one operating system.</p>
+                  <corva-stack gap="lg">
+                    <corva-badge tone="success">All regions operational</corva-badge>
+                    <corva-typography id="home-title" as="h1" variant="display">Infrastructure decisions before incidents become outages.</corva-typography>
+                    <p>SignalGrid brings capacity, response ownership, tenant impact, and executive reporting into one critical-operations workspace powered by CorvaUI.</p>
                     <div class="button-row">
-                      <a class="action-link primary" [href]="hrefFor('/work-orders')" (click)="navigate($event, '/work-orders')">Book a service visit</a>
-                      <a class="action-link secondary" [href]="hrefFor('/analytics')" (click)="navigate($event, '/analytics')">View live metrics</a>
+                      <a class="action-link primary" [href]="hrefFor('/analytics')" (click)="navigate($event, '/analytics')">Enter command center</a>
+                      <a class="action-link secondary" [href]="hrefFor('/work-orders')" (click)="navigate($event, '/work-orders')">Open an incident</a>
                     </div>
-                  </apex-stack>
+                  </corva-stack>
                 </div>
-                <apex-card eyebrow="Today at CorvaUI" heading="Readiness snapshot">
-                  <apex-stack gap="md">
-                    <apex-chart label="Service mix" [attr.data]="serviceMixChartJson"></apex-chart>
-                    <div class="metric-band">
-                      <article class="metric-card">
-                        <span>Open orders</span>
-                        <strong>128</strong>
-                        <apex-progress label="Ready to dispatch" value="82"></apex-progress>
-                      </article>
-                      <article class="metric-card">
-                        <span>First-time fix</span>
-                        <strong>94%</strong>
-                        <apex-progress label="Quality trend" value="94"></apex-progress>
-                      </article>
-                      <article class="metric-card">
-                        <span>At-risk sites</span>
-                        <strong>7</strong>
-                        <apex-progress label="Risk contained" value="38"></apex-progress>
-                      </article>
-                    </div>
-                  </apex-stack>
-                </apex-card>
+                <div class="hero-visual">
+                  <figure class="hero-photo">
+                    <img [attr.src]="assetHref('images/signal-server-room.jpg')" alt="Server racks in a monitored critical infrastructure facility" />
+                    <figcaption><span>Region 03</span><strong>12.8 MW protected</strong></figcaption>
+                  </figure>
+                  <div class="signal-strip" aria-label="Live infrastructure status">
+                    <div><span>Availability</span><strong>99.995%</strong></div>
+                    <div><span>Open risks</span><strong>4</strong></div>
+                    <corva-badge tone="success">Live telemetry</corva-badge>
+                  </div>
+                </div>
               </section>
 
               <section class="trust-band" aria-label="Customer proof">
-                <span>Trusted by regional facilities teams</span>
-                <strong>Aster Foods</strong>
-                <strong>Briar Commons</strong>
-                <strong>Cobalt Labs</strong>
-                <strong>Dover Hotel Group</strong>
+                <span>Trusted across critical environments</span>
+                <strong>Kentro Federal</strong>
+                <strong>Northstar Cloud</strong>
+                <strong>Meridian Health</strong>
+                <strong>Atlas Research</strong>
               </section>
 
               <section class="story-grid">
-                <apex-card eyebrow="Response" heading="Book urgent work without calling dispatch">
-                  <p>Customers can request service, upload logs, pick dates, and track status through one branded experience.</p>
-                </apex-card>
-                <apex-card eyebrow="Operations" heading="Managers see the route plan before it breaks">
-                  <p>Dashboards combine work orders, crew load, SLA risk, and account health in one operations surface.</p>
-                </apex-card>
-                <apex-card eyebrow="Proof" heading="Every page exercises CorvaUI in context">
-                  <p>Marketing, metrics, forms, records, settings, and package proof share the same token system.</p>
-                </apex-card>
+                <corva-card eyebrow="Observe" heading="Turn fragmented telemetry into one operating picture">
+                  <p>Operators see service health, capacity pressure, tenant impact, and maintenance windows in shared context.</p>
+                </corva-card>
+                <corva-card eyebrow="Respond" heading="Move every incident through accountable stages">
+                  <p>Structured intake, owners, evidence, escalation thresholds, and customer communications stay tied together.</p>
+                </corva-card>
+                <corva-card eyebrow="Report" heading="Give leaders signal instead of dashboard noise">
+                  <p>CorvaUI charts, grids, status, and workflow components produce an executive-ready command surface.</p>
+                </corva-card>
               </section>
             </section>
 
             <section *ngSwitchCase="'/analytics'" class="route-page analytics-page">
               <header class="page-heading">
-                <apex-typography as="h1" variant="display">Operations command center</apex-typography>
-                <p>Real route density: crew load, SLA risk, customer health, and work-order evidence in one dashboard.</p>
+                <corva-typography as="h1" variant="display">Critical operations command center</corva-typography>
+                <p>Live service posture, capacity, incident risk, tenant impact, and evidence in one decision surface.</p>
               </header>
 
-              <apex-grid columns="four" gap="md" align="stretch" class="metric-grid compact">
-                <apex-card *ngFor="let metric of dashboardMetrics" [attr.eyebrow]="metric.eyebrow" [attr.heading]="metric.heading" fill>
+              <figure class="analytics-photo">
+                <img [attr.src]="assetHref('images/signal-engineer.jpg')" alt="Infrastructure engineer operating industrial monitoring equipment" />
+                <figcaption><span>Human in the loop</span><strong>Automation surfaces risk. Operators own the decision.</strong></figcaption>
+              </figure>
+
+              <corva-grid columns="four" gap="md" align="stretch" class="metric-grid compact">
+                <corva-card *ngFor="let metric of dashboardMetrics" [attr.eyebrow]="metric.eyebrow" [attr.heading]="metric.heading" fill>
                   <strong class="metric-value">{{ metric.value }}</strong>
-                  <apex-progress [attr.label]="metric.label" [attr.value]="metric.progress"></apex-progress>
-                </apex-card>
-              </apex-grid>
+                  <corva-progress [attr.label]="metric.label" [attr.value]="metric.progress"></corva-progress>
+                </corva-card>
+              </corva-grid>
 
               <section class="dashboard-visual-grid">
-                <apex-card eyebrow="Dispatch" heading="Dispatch health">
-                  <apex-chart label="Weekly dispatch completion" [attr.data]="dispatchChartJson"></apex-chart>
-                </apex-card>
-                <apex-card eyebrow="Capacity" heading="Regional load">
-                  <apex-chart label="Regional scheduled capacity" [attr.data]="coverageChartJson"></apex-chart>
-                </apex-card>
-                <apex-card eyebrow="SLA" heading="Risk mix">
-                  <apex-chart label="Open SLA risk by cause" [attr.data]="riskChartJson"></apex-chart>
-                </apex-card>
-                <apex-card eyebrow="Health" heading="Customer health">
-                  <apex-chart label="Customer health by segment" [attr.data]="healthChartJson"></apex-chart>
-                </apex-card>
+                <corva-card eyebrow="Dispatch" heading="Dispatch health">
+                  <corva-chart label="Weekly dispatch completion" [attr.data]="dispatchChartJson"></corva-chart>
+                </corva-card>
+                <corva-card eyebrow="Capacity" heading="Regional load">
+                  <corva-chart label="Regional scheduled capacity" [attr.data]="coverageChartJson"></corva-chart>
+                </corva-card>
+                <corva-card eyebrow="SLA" heading="Risk mix">
+                  <corva-chart label="Open SLA risk by cause" [attr.data]="riskChartJson"></corva-chart>
+                </corva-card>
+                <corva-card eyebrow="Health" heading="Customer health">
+                  <corva-chart label="Customer health by segment" [attr.data]="healthChartJson"></corva-chart>
+                </corva-card>
               </section>
 
               <section class="dashboard-shell">
-                <apex-card eyebrow="Crew" heading="Crew utilization">
-                  <apex-chart label="Crew utilization" [attr.data]="crewChartJson"></apex-chart>
-                </apex-card>
-                <apex-card eyebrow="Territory" heading="Territory watchlist">
+                <corva-card eyebrow="Crew" heading="Crew utilization">
+                  <corva-chart label="Crew utilization" [attr.data]="crewChartJson"></corva-chart>
+                </corva-card>
+                <corva-card eyebrow="Territory" heading="Territory watchlist">
                   <ul class="proof-list">
                     <li><strong>North Loop</strong><span>Crew A has three stops and one SLA watch.</span></li>
                     <li><strong>Lakeview</strong><span>Crew B cleared after customer approval.</span></li>
                     <li><strong>West Yard</strong><span>Parts hold blocks a critical closeout.</span></li>
                   </ul>
-                </apex-card>
+                </corva-card>
               </section>
 
-              <apex-card eyebrow="Live queue" heading="Route health">
-                <apex-data-grid
+              <corva-card eyebrow="Live queue" heading="Route health">
+                <corva-data-grid
                   caption="Open work order queue"
                   [attr.columns]="routeColumnsJson"
                   [attr.rows]="routeRowsJson"
@@ -197,25 +192,25 @@ const serviceRecordColumns = [
                   filterable
                   pageable
                   page-size="3"
-                ></apex-data-grid>
-              </apex-card>
+                ></corva-data-grid>
+              </corva-card>
             </section>
 
             <section *ngSwitchCase="'/customers'" class="route-page customers-page">
               <header class="page-heading">
-                <apex-typography as="h1" variant="display">Account pipeline and health records</apex-typography>
+                <corva-typography as="h1" variant="display">Account pipeline and health records</corva-typography>
                 <p>A customer operations page with searchable records, structured data, and next-best action states.</p>
               </header>
 
-              <apex-toolbar label="Customer tools" density="comfortable" wrap>
-                <apex-search-form label="Search accounts" placeholder="Search account, plan, owner"></apex-search-form>
-                <apex-button variant="secondary">Export CSV</apex-button>
-                <apex-button>Add account</apex-button>
-              </apex-toolbar>
+              <corva-toolbar label="Customer tools" density="comfortable" wrap>
+                <corva-search-form label="Search accounts" placeholder="Search account, plan, owner"></corva-search-form>
+                <corva-button variant="secondary">Export CSV</corva-button>
+                <corva-button>Add account</corva-button>
+              </corva-toolbar>
 
               <section class="split-grid wide-left">
-                <apex-card eyebrow="Pipeline" heading="Priority accounts">
-                  <apex-data-grid
+                <corva-card eyebrow="Pipeline" heading="Priority accounts">
+                  <corva-data-grid
                     caption="Priority customer accounts"
                     [attr.columns]="customerColumnsJson"
                     [attr.rows]="customerRowsJson"
@@ -223,12 +218,12 @@ const serviceRecordColumns = [
                     filterable
                     pageable
                     page-size="4"
-                  ></apex-data-grid>
-                </apex-card>
-                <apex-card eyebrow="Selected account" heading="Granite Ridge Health">
-                  <apex-stack gap="md">
+                  ></corva-data-grid>
+                </corva-card>
+                <corva-card eyebrow="Selected account" heading="Granite Ridge Health">
+                  <corva-stack gap="md">
                     <div class="contact-lead">
-                      <apex-avatar initials="MC" size="lg"></apex-avatar>
+                      <corva-avatar initials="MC" size="lg"></corva-avatar>
                       <div>
                         <strong>Mara Chen</strong>
                         <span>Regional owner</span>
@@ -236,29 +231,29 @@ const serviceRecordColumns = [
                     </div>
                     <div class="record-line"><span>Renewal</span><strong>Aug 30</strong></div>
                     <div class="record-line"><span>Open sites</span><strong>18</strong></div>
-                    <div class="record-line"><span>Risk</span><apex-badge tone="warning">Parts delays</apex-badge></div>
-                    <apex-divider></apex-divider>
-                    <apex-timeline [attr.events]="accountTimelineJson"></apex-timeline>
-                  </apex-stack>
-                </apex-card>
+                    <div class="record-line"><span>Risk</span><corva-badge tone="warning">Parts delays</corva-badge></div>
+                    <div class="section-rule" role="presentation"></div>
+                    <corva-timeline [attr.events]="accountTimelineJson"></corva-timeline>
+                  </corva-stack>
+                </corva-card>
               </section>
             </section>
 
             <section *ngSwitchCase="'/data-table'" class="route-page data-table-page">
               <header class="page-heading">
-                <apex-typography as="h1" variant="display">Service records data table</apex-typography>
+                <corva-typography as="h1" variant="display">Service records data table</corva-typography>
                 <p>A routed data-table page proving CorvaUI DataGrid sorting, filtering, and paging in Angular.</p>
               </header>
 
-              <apex-toolbar label="Data table controls" density="comfortable" wrap>
-                <apex-search-form label="Find service record" placeholder="Use column filters below for scoped search"></apex-search-form>
-                <apex-button variant="secondary">Export CSV</apex-button>
-                <apex-button>Save view</apex-button>
-              </apex-toolbar>
+              <corva-toolbar label="Data table controls" density="comfortable" wrap>
+                <corva-search-form label="Find service record" placeholder="Use column filters below for scoped search"></corva-search-form>
+                <corva-button variant="secondary">Export CSV</corva-button>
+                <corva-button>Save view</corva-button>
+              </corva-toolbar>
 
               <section class="split-grid wide-left">
-                <apex-card eyebrow="Grid" heading="Service record queue">
-                  <apex-data-grid
+                <corva-card eyebrow="Grid" heading="Service record queue">
+                  <corva-data-grid
                     caption="Service record queue"
                     [attr.columns]="serviceRecordColumnsJson"
                     [attr.rows]="serviceRecordRowsJson"
@@ -266,104 +261,104 @@ const serviceRecordColumns = [
                     filterable
                     pageable
                     page-size="3"
-                  ></apex-data-grid>
-                </apex-card>
+                  ></corva-data-grid>
+                </corva-card>
                 <div class="insight-column">
-                  <apex-card eyebrow="Proof" heading="Grid behavior">
+                  <corva-card eyebrow="Proof" heading="Grid behavior">
                     <ul class="proof-list">
                       <li><strong>One-line sorting</strong><span>Enabled with the sortable flag.</span></li>
                       <li><strong>Column filters</strong><span>Enabled with the filterable flag.</span></li>
                       <li><strong>Paging</strong><span>Enabled with pageable and page-size.</span></li>
                     </ul>
-                  </apex-card>
-                  <apex-card eyebrow="Package" heading="Angular custom elements">
+                  </corva-card>
+                  <corva-card eyebrow="Package" heading="Angular custom elements">
                     <p>This page uses CorvaUI Stencil components through Angular CUSTOM_ELEMENTS_SCHEMA.</p>
-                  </apex-card>
+                  </corva-card>
                 </div>
               </section>
             </section>
 
             <section *ngSwitchCase="'/work-orders'" class="route-page work-orders-page">
               <header class="page-heading">
-                <apex-typography as="h1" variant="display">Create a service visit</apex-typography>
+                <corva-typography as="h1" variant="display">Create a service visit</corva-typography>
                 <p>A realistic intake page with typed fields, route selection, urgency, attachment, and dispatch confidence.</p>
               </header>
 
               <section class="split-grid">
-                <apex-card eyebrow="Request intake" heading="Service details">
+                <corva-card eyebrow="Request intake" heading="Service details">
                   <div class="form-grid">
-                    <apex-text-field label="Customer" value="Aster Foods"></apex-text-field>
-                    <apex-text-field label="Asset" value="Rooftop unit 14"></apex-text-field>
-                    <apex-select label="Service type" [attr.options]="serviceTypeOptionsJson" value="maintenance"></apex-select>
-                    <apex-date-picker label="Requested date" value="2026-08-14"></apex-date-picker>
-                    <apex-textarea label="Technician notes" rows="4" value="Customer reports intermittent alarm after compressor cycle."></apex-textarea>
-                    <apex-checkbox label="Notify customer when crew is assigned" checked></apex-checkbox>
+                    <corva-text-field label="Customer" value="Aster Foods"></corva-text-field>
+                    <corva-text-field label="Asset" value="Rooftop unit 14"></corva-text-field>
+                    <corva-select label="Service type" [attr.options]="serviceTypeOptionsJson" value="maintenance"></corva-select>
+                    <corva-date-picker label="Requested date" value="2026-08-14"></corva-date-picker>
+                    <corva-textarea label="Technician notes" rows="4" value="Customer reports intermittent alarm after compressor cycle."></corva-textarea>
+                    <corva-checkbox label="Notify customer when crew is assigned" checked></corva-checkbox>
                   </div>
-                </apex-card>
-                <apex-card eyebrow="Dispatch controls" heading="Route plan">
+                </corva-card>
+                <corva-card eyebrow="Dispatch controls" heading="Route plan">
                   <div class="form-grid single-column">
-                    <apex-select label="Priority" [attr.options]="priorityOptionsJson" value="high"></apex-select>
-                    <apex-number-field label="Crew size" value="2" min="1" max="8"></apex-number-field>
-                    <apex-slider label="Dispatch confidence" value="72" min="0" max="100"></apex-slider>
-                    <apex-alert tone="info" heading="Routing note">Crew assignment updates the customer timeline and route board.</apex-alert>
-                    <apex-button>Create work order</apex-button>
+                    <corva-select label="Priority" [attr.options]="priorityOptionsJson" value="high"></corva-select>
+                    <corva-number-field label="Crew size" value="2" min="1" max="8"></corva-number-field>
+                    <corva-slider label="Dispatch confidence" value="72" min="0" max="100"></corva-slider>
+                    <corva-alert tone="info" heading="Routing note">Crew assignment updates the customer timeline and route board.</corva-alert>
+                    <corva-button>Create work order</corva-button>
                   </div>
-                </apex-card>
+                </corva-card>
               </section>
 
-              <apex-card eyebrow="Kanban" heading="Daily work movement">
-                <apex-workflow-board [attr.columns]="workflowColumnsJson"></apex-workflow-board>
-              </apex-card>
+              <corva-card eyebrow="Kanban" heading="Daily work movement">
+                <corva-workflow-board [attr.columns]="workflowColumnsJson"></corva-workflow-board>
+              </corva-card>
             </section>
 
             <section *ngSwitchCase="'/settings'" class="route-page settings-page">
               <header class="page-heading">
-                <apex-badge tone="neutral">Settings</apex-badge>
-                <apex-typography as="h1" variant="display">Workspace controls</apex-typography>
+                <corva-badge tone="neutral">Settings</corva-badge>
+                <corva-typography as="h1" variant="display">Workspace controls</corva-typography>
                 <p>Preference surfaces prove form controls, tabs, selects, toggles, and theme tokens in one place.</p>
               </header>
 
-              <apex-card eyebrow="Preferences" heading="Operator workspace">
-                <apex-tabs label="Settings sections" [attr.items]="settingsTabsJson" active-id="profile"></apex-tabs>
+              <corva-card eyebrow="Preferences" heading="Operator workspace">
+                <corva-tabs label="Settings sections" [attr.items]="settingsTabsJson" active-id="profile"></corva-tabs>
                 <div class="settings-grid">
-                  <apex-text-field label="Display name" value="Ryan Demo Operator"></apex-text-field>
-                  <apex-text-field label="Email" type="email" value="ops@example.com"></apex-text-field>
-                  <apex-select label="Locale" [attr.options]="localeOptionsJson" value="en-US"></apex-select>
-                  <apex-select label="Timezone" [attr.options]="timezoneOptionsJson" value="america-new-york"></apex-select>
-                  <apex-switch label="Notify on critical reassignment" checked></apex-switch>
-                  <apex-switch label="Compact dispatch rows"></apex-switch>
-                  <apex-toggle-group label="Default landing page" [attr.options]="landingOptionsJson" value="analytics"></apex-toggle-group>
-                  <apex-slider label="Alert sensitivity" value="72" min="0" max="100"></apex-slider>
+                  <corva-text-field label="Display name" value="Ryan Demo Operator"></corva-text-field>
+                  <corva-text-field label="Email" type="email" value="ops@example.com"></corva-text-field>
+                  <corva-select label="Locale" [attr.options]="localeOptionsJson" value="en-US"></corva-select>
+                  <corva-select label="Timezone" [attr.options]="timezoneOptionsJson" value="america-new-york"></corva-select>
+                  <corva-switch label="Notify on critical reassignment" checked></corva-switch>
+                  <corva-switch label="Compact dispatch rows"></corva-switch>
+                  <corva-toggle-group label="Default landing page" [attr.options]="landingOptionsJson" value="analytics"></corva-toggle-group>
+                  <corva-slider label="Alert sensitivity" value="72" min="0" max="100"></corva-slider>
                 </div>
-              </apex-card>
+              </corva-card>
             </section>
 
             <section *ngSwitchCase="'/about'" class="route-page about-page">
               <header class="page-heading">
-                <apex-badge tone="info">About the demo</apex-badge>
-                <apex-typography as="h1" variant="display">Angular plus CorvaUI</apex-typography>
+                <corva-badge tone="info">About the demo</corva-badge>
+                <corva-typography as="h1" variant="display">Angular plus CorvaUI</corva-typography>
                 <p>This mock website uses shipped CorvaUI tokens and Stencil custom elements inside Angular, shaped as a real operations product.</p>
               </header>
 
               <section class="feature-grid">
-                <apex-card *ngFor="let proof of proofCards" [attr.eyebrow]="proof.eyebrow" [attr.heading]="proof.heading">
+                <corva-card *ngFor="let proof of proofCards" [attr.eyebrow]="proof.eyebrow" [attr.heading]="proof.heading">
                   <p>{{ proof.copy }}</p>
-                  <apex-badge [attr.tone]="proof.tone">{{ proof.status }}</apex-badge>
-                </apex-card>
+                  <corva-badge [attr.tone]="proof.tone">{{ proof.status }}</corva-badge>
+                </corva-card>
               </section>
 
               <section class="split-grid">
-                <apex-card eyebrow="Atomic coverage" heading="Component layers">
-                  <apex-tree-view label="CorvaUI layers" [attr.items]="treeJson"></apex-tree-view>
-                </apex-card>
-                <apex-card eyebrow="Empty state" heading="No blocked migrations">
-                  <apex-empty-state
+                <corva-card eyebrow="Atomic coverage" heading="Component layers">
+                  <corva-tree-view label="CorvaUI layers" [attr.items]="treeJson"></corva-tree-view>
+                </corva-card>
+                <corva-card eyebrow="Empty state" heading="No blocked migrations">
+                  <corva-empty-state
                     icon="check-circle"
                     heading="Ready for review"
-                    description="The demo deploy proves Concept tokens and Angular rendering against public GitHub Pages."
+                    description="The demo deploy proves Concept tokens and Angular rendering against Vercel."
                     action-label="View analytics"
-                  ></apex-empty-state>
-                </apex-card>
+                  ></corva-empty-state>
+                </corva-card>
               </section>
             </section>
           </ng-container>
@@ -372,8 +367,8 @@ const serviceRecordColumns = [
 
       <footer class="site-footer">
         <div>
-          <strong>CorvaUI Angular</strong>
-          <span>Angular demo built with CorvaUI tokens and Stencil custom elements.</span>
+          <strong>SignalGrid by CorvaUI</strong>
+          <span>Angular critical-operations demo built with Concept tokens and CorvaUI custom elements.</span>
         </div>
         <nav aria-label="Footer navigation">
           <button type="button" (click)="go('/analytics')">Operations</button>
@@ -383,8 +378,8 @@ const serviceRecordColumns = [
       </footer>
 
       <nav class="mobile-nav" aria-label="Mobile primary">
-        <a *ngFor="let item of navItems" [href]="hrefFor(item.path)" [class.active]="activePath === item.path" (click)="navigate($event, item.path)">
-          <apex-icon [attr.name]="item.icon" size="sm"></apex-icon>
+        <a *ngFor="let item of navItems" [href]="hrefFor(item.path)" [attr.aria-label]="item.label" [class.active]="activePath === item.path" (click)="navigate($event, item.path)">
+          <corva-icon [attr.name]="item.icon" size="sm"></corva-icon>
           <span>{{ item.label }}</span>
         </a>
       </nav>
@@ -583,6 +578,15 @@ class AppComponent {
 
   private setRoute(path: RoutePath, mode: "none" | "push" | "replace"): void {
     this.activePath = path;
+
+    window.setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".corva-table-container").forEach((container) => {
+        const caption = container.querySelector("caption")?.textContent?.trim() ?? "Data table";
+        container.tabIndex = 0;
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", `${caption}, horizontally scrollable`);
+      });
+    }, 0);
 
     const active = routes.find((route) => route.path === this.activePath) ?? routes[0];
     document.title = active.path === "/" ? "CorvaUI Angular Demo" : `${active.title} | CorvaUI`;

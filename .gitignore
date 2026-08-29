@@ -8,3 +8,7 @@ out
 .angular
 .vite
 .env
+.vercel
+.env*
+test-results
+playwright-report

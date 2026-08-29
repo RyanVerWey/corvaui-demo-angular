@@ -1,7 +1,7 @@
 {
   "version": 1,
   "projects": {
-    "apexui-demo-angular": {
+    "corvaui-demo-angular": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -9,7 +9,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/apexui-demo-angular",
+            "outputPath": "dist/corvaui-demo-angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -21,7 +21,7 @@
                 }
               ],
               "styles": [
-                "node_modules/@apexui/tokens/dist/tokens.css",
+                "node_modules/@corvaui/tokens/dist/tokens.css",
                 "src/styles.css"
               ],
               "optimization": {
@@ -34,7 +34,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "buildTarget": "apexui-demo-angular:build"
+            "buildTarget": "corvaui-demo-angular:build"
           }
         }
       }
