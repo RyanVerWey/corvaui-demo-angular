@@ -25,6 +25,12 @@ for (const [name, path, content, imageCount] of routes) {
     await expect(page.locator(".route-panel img")).toHaveCount(imageCount);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
+    if (name === "data" && testInfo.project.name === "mobile") {
+      const gridScroll = page.locator(".data-grid-scroll");
+      await expect(gridScroll).toBeVisible();
+      const dimensions = await gridScroll.evaluate((element) => ({ clientWidth: element.clientWidth, scrollWidth: element.scrollWidth }));
+      expect(dimensions.scrollWidth).toBeGreaterThan(dimensions.clientWidth);
+    }
     await page.addScriptTag({ path: axePath });
     const violations = await page.evaluate(async () => (await (window as typeof window & { axe: { run: Function } }).axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa"] } })).violations);
     expect(violations).toEqual([]);

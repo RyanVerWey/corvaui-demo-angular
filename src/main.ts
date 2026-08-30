@@ -1,10 +1,38 @@
 import { CommonModule } from "@angular/common";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
-import { defineCustomElements } from "@corvaui/web-components/loader";
+import {
+  CorvaAlert,
+  CorvaAvatar,
+  CorvaBadge,
+  CorvaBreadcrumbs,
+  CorvaButton,
+  CorvaCard,
+  CorvaChart,
+  CorvaCheckbox,
+  CorvaDataGrid,
+  CorvaDatePicker,
+  CorvaEmptyState,
+  CorvaGrid,
+  CorvaIcon,
+  CorvaNumberField,
+  CorvaProgress,
+  CorvaSearchForm,
+  CorvaSelect,
+  CorvaSlider,
+  CorvaStack,
+  CorvaSwitch,
+  CorvaTabs,
+  CorvaTextField,
+  CorvaTextarea,
+  CorvaTimeline,
+  CorvaToggleGroup,
+  CorvaToolbar,
+  CorvaTreeView,
+  CorvaTypography,
+  CorvaWorkflowBoard,
+} from "@corvaui/angular";
 import "zone.js";
-
-defineCustomElements();
 
 type RoutePath = "/" | "/analytics" | "/work-orders" | "/customers" | "/data-table" | "/settings" | "/about";
 type SwitchEvent = CustomEvent<{ checked: boolean }>;
@@ -59,8 +87,38 @@ const serviceRecordColumns = [
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    CommonModule,
+    CorvaAlert,
+    CorvaAvatar,
+    CorvaBadge,
+    CorvaBreadcrumbs,
+    CorvaButton,
+    CorvaCard,
+    CorvaChart,
+    CorvaCheckbox,
+    CorvaDataGrid,
+    CorvaDatePicker,
+    CorvaEmptyState,
+    CorvaGrid,
+    CorvaIcon,
+    CorvaNumberField,
+    CorvaProgress,
+    CorvaSearchForm,
+    CorvaSelect,
+    CorvaSlider,
+    CorvaStack,
+    CorvaSwitch,
+    CorvaTabs,
+    CorvaTextField,
+    CorvaTextarea,
+    CorvaTimeline,
+    CorvaToggleGroup,
+    CorvaToolbar,
+    CorvaTreeView,
+    CorvaTypography,
+    CorvaWorkflowBoard,
+  ],
   template: `
     <main class="site-shell" [attr.data-corva-theme]="theme">
       <header class="site-header">
@@ -87,7 +145,7 @@ const serviceRecordColumns = [
 
       <div class="route-shell">
         <section class="route-panel" [attr.aria-label]="activeLabel + ' page'">
-          <corva-breadcrumbs [attr.items]="breadcrumbsJson"></corva-breadcrumbs>
+          <corva-breadcrumbs [items]="breadcrumbs"></corva-breadcrumbs>
 
           <ng-container [ngSwitch]="activePath">
             <section *ngSwitchCase="'/'" class="route-page home-page">
@@ -149,30 +207,30 @@ const serviceRecordColumns = [
               </figure>
 
               <corva-grid columns="four" gap="md" align="stretch" class="metric-grid compact">
-                <corva-card *ngFor="let metric of dashboardMetrics" [attr.eyebrow]="metric.eyebrow" [attr.heading]="metric.heading" fill>
+                <corva-card *ngFor="let metric of dashboardMetrics" [eyebrow]="metric.eyebrow" [heading]="metric.heading" fill>
                   <strong class="metric-value">{{ metric.value }}</strong>
-                  <corva-progress [attr.label]="metric.label" [attr.value]="metric.progress"></corva-progress>
+                  <corva-progress [label]="metric.label" [value]="metric.progress"></corva-progress>
                 </corva-card>
               </corva-grid>
 
               <section class="dashboard-visual-grid">
                 <corva-card eyebrow="Dispatch" heading="Dispatch health">
-                  <corva-chart label="Weekly dispatch completion" [attr.data]="dispatchChartJson"></corva-chart>
+                  <corva-chart label="Weekly dispatch completion" [data]="dispatchChart"></corva-chart>
                 </corva-card>
                 <corva-card eyebrow="Capacity" heading="Regional load">
-                  <corva-chart label="Regional scheduled capacity" [attr.data]="coverageChartJson"></corva-chart>
+                  <corva-chart label="Regional scheduled capacity" [data]="coverageChart"></corva-chart>
                 </corva-card>
                 <corva-card eyebrow="SLA" heading="Risk mix">
-                  <corva-chart label="Open SLA risk by cause" [attr.data]="riskChartJson"></corva-chart>
+                  <corva-chart label="Open SLA risk by cause" [data]="riskChart"></corva-chart>
                 </corva-card>
                 <corva-card eyebrow="Health" heading="Customer health">
-                  <corva-chart label="Customer health by segment" [attr.data]="healthChartJson"></corva-chart>
+                  <corva-chart label="Customer health by segment" [data]="healthChart"></corva-chart>
                 </corva-card>
               </section>
 
               <section class="dashboard-shell">
                 <corva-card eyebrow="Crew" heading="Crew utilization">
-                  <corva-chart label="Crew utilization" [attr.data]="crewChartJson"></corva-chart>
+                  <corva-chart label="Crew utilization" [data]="crewChart"></corva-chart>
                 </corva-card>
                 <corva-card eyebrow="Territory" heading="Territory watchlist">
                   <ul class="proof-list">
@@ -186,8 +244,8 @@ const serviceRecordColumns = [
               <corva-card eyebrow="Live queue" heading="Route health">
                 <corva-data-grid
                   caption="Open work order queue"
-                  [attr.columns]="routeColumnsJson"
-                  [attr.rows]="routeRowsJson"
+                  [columns]="routeColumns"
+                  [rows]="routeRows"
                   sortable
                   filterable
                   pageable
@@ -212,8 +270,8 @@ const serviceRecordColumns = [
                 <corva-card eyebrow="Pipeline" heading="Priority accounts">
                   <corva-data-grid
                     caption="Priority customer accounts"
-                    [attr.columns]="customerColumnsJson"
-                    [attr.rows]="customerRowsJson"
+                    [columns]="customerColumns"
+                    [rows]="customerRows"
                     sortable
                     filterable
                     pageable
@@ -233,7 +291,7 @@ const serviceRecordColumns = [
                     <div class="record-line"><span>Open sites</span><strong>18</strong></div>
                     <div class="record-line"><span>Risk</span><corva-badge tone="warning">Parts delays</corva-badge></div>
                     <div class="section-rule" role="presentation"></div>
-                    <corva-timeline [attr.events]="accountTimelineJson"></corva-timeline>
+                    <corva-timeline [events]="accountTimeline"></corva-timeline>
                   </corva-stack>
                 </corva-card>
               </section>
@@ -253,15 +311,17 @@ const serviceRecordColumns = [
 
               <section class="split-grid wide-left">
                 <corva-card eyebrow="Grid" heading="Service record queue">
-                  <corva-data-grid
-                    caption="Service record queue"
-                    [attr.columns]="serviceRecordColumnsJson"
-                    [attr.rows]="serviceRecordRowsJson"
-                    sortable
-                    filterable
-                    pageable
-                    page-size="3"
-                  ></corva-data-grid>
+                  <div class="data-grid-scroll" role="region" aria-label="Service record queue, horizontally scrollable">
+                    <corva-data-grid
+                      caption="Service record queue"
+                      [columns]="serviceRecordColumns"
+                      [rows]="serviceRecordRows"
+                      sortable
+                      filterable
+                      pageable
+                      page-size="3"
+                    ></corva-data-grid>
+                  </div>
                 </corva-card>
                 <div class="insight-column">
                   <corva-card eyebrow="Proof" heading="Grid behavior">
@@ -271,8 +331,8 @@ const serviceRecordColumns = [
                       <li><strong>Paging</strong><span>Enabled with pageable and page-size.</span></li>
                     </ul>
                   </corva-card>
-                  <corva-card eyebrow="Package" heading="Angular custom elements">
-                    <p>This page uses CorvaUI Stencil components through Angular CUSTOM_ELEMENTS_SCHEMA.</p>
+                  <corva-card eyebrow="Package" heading="Angular standalone wrappers">
+                    <p>This page uses CorvaUI's generated standalone Angular wrappers.</p>
                   </corva-card>
                 </div>
               </section>
@@ -289,7 +349,7 @@ const serviceRecordColumns = [
                   <div class="form-grid">
                     <corva-text-field label="Customer" value="Aster Foods"></corva-text-field>
                     <corva-text-field label="Asset" value="Rooftop unit 14"></corva-text-field>
-                    <corva-select label="Service type" [attr.options]="serviceTypeOptionsJson" value="maintenance"></corva-select>
+                    <corva-select label="Service type" [options]="serviceTypeOptions" value="maintenance"></corva-select>
                     <corva-date-picker label="Requested date" value="2026-08-14"></corva-date-picker>
                     <corva-textarea label="Technician notes" rows="4" value="Customer reports intermittent alarm after compressor cycle."></corva-textarea>
                     <corva-checkbox label="Notify customer when crew is assigned" checked></corva-checkbox>
@@ -297,7 +357,7 @@ const serviceRecordColumns = [
                 </corva-card>
                 <corva-card eyebrow="Dispatch controls" heading="Route plan">
                   <div class="form-grid single-column">
-                    <corva-select label="Priority" [attr.options]="priorityOptionsJson" value="high"></corva-select>
+                    <corva-select label="Priority" [options]="priorityOptions" value="high"></corva-select>
                     <corva-number-field label="Crew size" value="2" min="1" max="8"></corva-number-field>
                     <corva-slider label="Dispatch confidence" value="72" min="0" max="100"></corva-slider>
                     <corva-alert tone="info" heading="Routing note">Crew assignment updates the customer timeline and route board.</corva-alert>
@@ -307,7 +367,7 @@ const serviceRecordColumns = [
               </section>
 
               <corva-card eyebrow="Kanban" heading="Daily work movement">
-                <corva-workflow-board [attr.columns]="workflowColumnsJson"></corva-workflow-board>
+                <corva-workflow-board [columns]="workflowColumns"></corva-workflow-board>
               </corva-card>
             </section>
 
@@ -319,15 +379,15 @@ const serviceRecordColumns = [
               </header>
 
               <corva-card eyebrow="Preferences" heading="Operator workspace">
-                <corva-tabs label="Settings sections" [attr.items]="settingsTabsJson" active-id="profile"></corva-tabs>
+                <corva-tabs label="Settings sections" [items]="settingsTabs" active-id="profile"></corva-tabs>
                 <div class="settings-grid">
                   <corva-text-field label="Display name" value="Ryan Demo Operator"></corva-text-field>
                   <corva-text-field label="Email" type="email" value="ops@example.com"></corva-text-field>
-                  <corva-select label="Locale" [attr.options]="localeOptionsJson" value="en-US"></corva-select>
-                  <corva-select label="Timezone" [attr.options]="timezoneOptionsJson" value="america-new-york"></corva-select>
+                  <corva-select label="Locale" [options]="localeOptions" value="en-US"></corva-select>
+                  <corva-select label="Timezone" [options]="timezoneOptions" value="america-new-york"></corva-select>
                   <corva-switch label="Notify on critical reassignment" checked></corva-switch>
                   <corva-switch label="Compact dispatch rows"></corva-switch>
-                  <corva-toggle-group label="Default landing page" [attr.options]="landingOptionsJson" value="analytics"></corva-toggle-group>
+                  <corva-toggle-group label="Default landing page" [options]="landingOptions" value="analytics"></corva-toggle-group>
                   <corva-slider label="Alert sensitivity" value="72" min="0" max="100"></corva-slider>
                 </div>
               </corva-card>
@@ -337,19 +397,19 @@ const serviceRecordColumns = [
               <header class="page-heading">
                 <corva-badge tone="info">About the demo</corva-badge>
                 <corva-typography as="h1" variant="display">Angular plus CorvaUI</corva-typography>
-                <p>This mock website uses shipped CorvaUI tokens and Stencil custom elements inside Angular, shaped as a real operations product.</p>
+                <p>This mock website uses shipped CorvaUI tokens and generated standalone wrappers inside Angular, shaped as a real operations product.</p>
               </header>
 
               <section class="feature-grid">
-                <corva-card *ngFor="let proof of proofCards" [attr.eyebrow]="proof.eyebrow" [attr.heading]="proof.heading">
+                <corva-card *ngFor="let proof of proofCards" [eyebrow]="proof.eyebrow" [heading]="proof.heading">
                   <p>{{ proof.copy }}</p>
-                  <corva-badge [attr.tone]="proof.tone">{{ proof.status }}</corva-badge>
+                  <corva-badge [tone]="$any(proof.tone)">{{ proof.status }}</corva-badge>
                 </corva-card>
               </section>
 
               <section class="split-grid">
                 <corva-card eyebrow="Atomic coverage" heading="Component layers">
-                  <corva-tree-view label="CorvaUI layers" [attr.items]="treeJson"></corva-tree-view>
+                  <corva-tree-view label="CorvaUI layers" [items]="treeItems"></corva-tree-view>
                 </corva-card>
                 <corva-card eyebrow="Empty state" heading="No blocked migrations">
                   <corva-empty-state
@@ -368,7 +428,7 @@ const serviceRecordColumns = [
       <footer class="site-footer">
         <div>
           <strong>SignalGrid by CorvaUI</strong>
-          <span>Angular critical-operations demo built with Concept tokens and CorvaUI custom elements.</span>
+          <span>Angular critical-operations demo built with Concept tokens and CorvaUI standalone wrappers.</span>
         </div>
         <nav aria-label="Footer navigation">
           <button type="button" (click)="go('/analytics')">Operations</button>
@@ -379,7 +439,7 @@ const serviceRecordColumns = [
 
       <nav class="mobile-nav" aria-label="Mobile primary">
         <a *ngFor="let item of navItems" [href]="hrefFor(item.path)" [attr.aria-label]="item.label" [class.active]="activePath === item.path" (click)="navigate($event, item.path)">
-          <corva-icon [attr.name]="item.icon" size="sm"></corva-icon>
+          <corva-icon [name]="$any(item.icon)" size="sm"></corva-icon>
           <span>{{ item.label }}</span>
         </a>
       </nav>
@@ -400,7 +460,7 @@ class AppComponent {
 
   proofCards = [
     { eyebrow: "Tokens", heading: "Concept theme", copy: "Light and dark modes come from the CorvaUI Concept token family.", status: "concept", tone: "info" },
-    { eyebrow: "Angular", heading: "Custom elements", copy: "Angular uses CUSTOM_ELEMENTS_SCHEMA with CorvaUI Stencil components.", status: "rendering", tone: "success" },
+    { eyebrow: "Angular", heading: "Standalone wrappers", copy: "Angular imports CorvaUI's generated standalone component directives.", status: "rendering", tone: "success" },
     { eyebrow: "Product UI", heading: "Real site shape", copy: "Pages model home, analytics, work orders, customers, data table, settings, and about.", status: "routed", tone: "success" }
   ];
 
@@ -414,129 +474,129 @@ class AppComponent {
     return this.isDark ? "concept-dark" : "concept-light";
   }
 
-  get breadcrumbsJson(): string {
+  get breadcrumbs(): any[] {
     const active = this.navItems.find((item) => item.path === this.activePath) ?? this.navItems[0];
-    return JSON.stringify([{ label: "CorvaUI", href: this.hrefFor("/") }, { label: active.label }]);
+    return [{ label: "CorvaUI", href: this.hrefFor("/") }, { label: active.label }];
   }
 
   get activeLabel(): string {
     return (this.navItems.find((item) => item.path === this.activePath) ?? this.navItems[0]).label;
   }
 
-  serviceMixChartJson = JSON.stringify([
+  serviceMixChart: any[] = [
     { label: "Maintenance", value: 86 },
     { label: "Emergency", value: 34 },
     { label: "Install", value: 52 },
     { label: "Audit", value: 69 }
-  ]);
+  ];
 
-  dispatchChartJson = JSON.stringify([
+  dispatchChart: any[] = [
     { label: "Mon", value: 72 },
     { label: "Tue", value: 84 },
     { label: "Wed", value: 91 },
     { label: "Thu", value: 78 },
     { label: "Fri", value: 88 }
-  ]);
+  ];
 
-  coverageChartJson = JSON.stringify([
+  coverageChart: any[] = [
     { label: "North Loop", value: 86 },
     { label: "Lakeview", value: 64 },
     { label: "West Yard", value: 73 },
     { label: "South Bay", value: 58 }
-  ]);
+  ];
 
-  riskChartJson = JSON.stringify([
+  riskChart: any[] = [
     { label: "Parts hold", value: 42 },
     { label: "Crew delay", value: 28 },
     { label: "Customer approval", value: 18 },
     { label: "Weather", value: 12 }
-  ]);
+  ];
 
-  healthChartJson = JSON.stringify([
+  healthChart: any[] = [
     { label: "Enterprise", value: 94 },
     { label: "Priority", value: 87 },
     { label: "Preventive", value: 91 },
     { label: "At risk", value: 38 }
-  ]);
+  ];
 
-  crewChartJson = JSON.stringify([
+  crewChart: any[] = [
     { label: "Crew A", value: 92 },
     { label: "Crew B", value: 76 },
     { label: "Crew C", value: 88 },
     { label: "Crew D", value: 81 }
-  ]);
+  ];
 
-  routeColumnsJson = JSON.stringify(routeColumns);
-  routeRowsJson = JSON.stringify(routeRows);
-  serviceRecordColumnsJson = JSON.stringify(serviceRecordColumns);
-  serviceRecordRowsJson = JSON.stringify(serviceRecordRows);
+  routeColumns: any[] = routeColumns;
+  routeRows: any[] = routeRows;
+  serviceRecordColumns: any[] = serviceRecordColumns;
+  serviceRecordRows: any[] = serviceRecordRows;
 
-  customerColumnsJson = JSON.stringify([
+  customerColumns: any[] = [
     { key: "account", header: "Account", sortable: true, filterable: true },
     { key: "region", header: "Region", sortable: true, filterable: true },
     { key: "stage", header: "Stage", sortable: true, filterable: true },
     { key: "value", header: "Annual value", sortable: true, filterable: true },
     { key: "owner", header: "Owner", sortable: true, filterable: true }
-  ]);
+  ];
 
-  customerRowsJson = JSON.stringify([
+  customerRows: any[] = [
     { account: "Granite Ridge Health", region: "North", stage: "Renewal", value: "$480K", owner: "Mara Chen" },
     { account: "Cedarline Utilities", region: "West", stage: "Pilot", value: "$220K", owner: "Theo Grant" },
     { account: "HarborWorks Transit", region: "East", stage: "Expansion", value: "$680K", owner: "Iris Patel" },
     { account: "Summit Cold Storage", region: "Central", stage: "Qualified", value: "$140K", owner: "Jon Bell" },
     { account: "Northline Clinics", region: "South", stage: "Risk review", value: "$310K", owner: "Noor Ellis" }
-  ]);
+  ];
 
-  accountTimelineJson = JSON.stringify([
+  accountTimeline: any[] = [
     { label: "Renewal review", description: "Operations risk review scheduled.", meta: "Aug 12" },
     { label: "Critical job closed", description: "Cooling outage resolved under SLA.", meta: "Aug 10" },
     { label: "Quote approved", description: "Preventive maintenance expansion accepted.", meta: "Aug 04" }
-  ]);
+  ];
 
-  workflowColumnsJson = JSON.stringify([
+  workflowColumns: any[] = [
     { title: "Intake", items: [{ title: "Cooling outage", meta: "Granite Ridge" }, { title: "Panel fault", meta: "HarborWorks" }] },
     { title: "Scheduled", items: [{ title: "Dock sensor", meta: "Summit Cold" }, { title: "Roof unit", meta: "North clinic" }] },
     { title: "Approval", items: [{ title: "Compressor swap", meta: "$7,900 quote" }] },
     { title: "Closed", items: [{ title: "Generator test", meta: "Signed 10:42" }] }
-  ]);
+  ];
 
-  priorityOptionsJson = JSON.stringify([
+  priorityOptions: any[] = [
     { label: "Standard", value: "standard" },
     { label: "High", value: "high" },
     { label: "Critical", value: "critical" }
-  ]);
+  ];
 
-  serviceTypeOptionsJson = JSON.stringify([
+  serviceTypeOptions: any[] = [
     { label: "Preventive maintenance", value: "maintenance" },
     { label: "Emergency repair", value: "emergency" },
     { label: "Installation", value: "install" }
-  ]);
+  ];
 
-  settingsTabsJson = JSON.stringify([
+  settingsTabs: any[] = [
     { id: "profile", label: "Profile" },
     { id: "notifications", label: "Notifications" },
     { id: "routing", label: "Routing" }
-  ]);
+  ];
 
-  localeOptionsJson = JSON.stringify([
+  localeOptions: any[] = [
     { label: "English, United States", value: "en-US" },
     { label: "English, Canada", value: "en-CA" },
     { label: "Spanish, United States", value: "es-US" }
-  ]);
+  ];
 
-  timezoneOptionsJson = JSON.stringify([
+  timezoneOptions: any[] = [
     { label: "America/New York", value: "america-new-york" },
     { label: "America/Chicago", value: "america-chicago" },
     { label: "America/Denver", value: "america-denver" }
-  ]);
+  ];
 
-  landingOptionsJson = JSON.stringify([
+  landingOptions: any[] = [
     { label: "Analytics", value: "analytics" },
     { label: "Customers", value: "customers" },
     { label: "Work orders", value: "work-orders" }
-  ]);
+  ];
 
-  treeJson = JSON.stringify([
+  treeItems: any[] = [
     {
       id: "root",
       label: "CorvaUI demo",
@@ -547,7 +607,7 @@ class AppComponent {
         { id: "pages", label: "Pages: Home, Analytics, Work orders, Customers, Data table, Settings, About" }
       ]
     }
-  ]);
+  ];
 
   setTheme(event: Event): void {
     this.isDark = Boolean((event as SwitchEvent).detail?.checked);

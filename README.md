@@ -2,7 +2,7 @@
 
 Public Vercel demo for CorvaUI in Angular.
 
-This app uses `@corvaui/web-components` custom elements with Angular `CUSTOM_ELEMENTS_SCHEMA`.
+This app uses explicit standalone components from `@corvaui/angular` with CorvaUI Concept tokens. Its regression tests reject `CUSTOM_ELEMENTS_SCHEMA` and manual custom-element loader fallbacks.
 It demonstrates the CorvaUI Concept token family inside a routed mock operations website with home,
 analytics, customers, workflows, settings, and about pages.
 

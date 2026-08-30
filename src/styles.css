@@ -622,6 +622,13 @@ corva-data-grid {
   width: 100%;
 }
 
+.data-grid-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
 @media (max-width: 1120px) {
   .site-header {
     gap: var(--corva-space-3);
@@ -699,6 +706,17 @@ corva-data-grid {
 }
 
 @media (max-width: 680px) {
+  .data-grid-scroll {
+    width: calc(100vw - 4.5rem);
+    max-width: calc(100vw - 4.5rem);
+  }
+
+  .data-grid-scroll corva-data-grid {
+    width: 46rem;
+    min-width: 46rem;
+    max-width: none;
+  }
+
   .settings-grid,
   .form-grid {
     grid-template-columns: 1fr;
