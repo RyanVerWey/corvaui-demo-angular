@@ -44,3 +44,14 @@ test("Concept dark mode stays accessible", async ({ page }) => {
   await page.locator("corva-switch").click();
   await expect(page.locator(".site-shell")).toHaveAttribute("data-corva-theme", "concept-dark");
 });
+
+test("analytics chart renders three distinct theme series", async ({ page }) => {
+  await page.goto("/#/analytics", { waitUntil: "networkidle" });
+  const legend = page.getByRole("group", { name: "Weekly dispatch completion series" });
+  await expect(legend).toBeVisible();
+  await expect(page.locator(".corva-chart-legend-item")).toHaveCount(3);
+  const colors = await page.locator(".corva-chart-swatch").evaluateAll((nodes) =>
+    nodes.map((node) => getComputedStyle(node).backgroundColor),
+  );
+  expect(new Set(colors).size).toBe(3);
+});
