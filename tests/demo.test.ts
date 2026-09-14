@@ -7,11 +7,14 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
 
 describe("Angular showcase integrity", () => {
   it("uses only published CorvaUI packages and paths", () => {
-    expect(pkg.dependencies["@corvaui/angular"]).toBe("^0.1.8");
-    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.1.8");
+    expect(pkg.dependencies["@corvaui/angular"]).toBe("^0.2.1");
+    expect(pkg.dependencies["@corvaui/tokens"]).toBe("^0.2.1");
     expect(pkg.dependencies["@corvaui/web-components"]).toBeUndefined();
     expect(source).toContain('from "@corvaui/angular"');
     expect(source).toContain("CorvaDataGrid");
+    expect(source).toContain('icon: "chartBar"');
+    expect(source).toContain('icon: "clipboardList"');
+    expect(source).not.toMatch(/bar-chart-3|clipboard-list/);
     expect(source).not.toMatch(/CUSTOM_ELEMENTS_SCHEMA|defineCustomElements/);
     expect(`${source}${workspace}`).not.toMatch(/apexui|@apexui/i);
   });

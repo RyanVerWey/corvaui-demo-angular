@@ -39,8 +39,8 @@ type SwitchEvent = CustomEvent<{ checked: boolean }>;
 
 const routes: Array<{ path: RoutePath; label: string; icon: string; title: string }> = [
   { path: "/", label: "Home", icon: "home", title: "CorvaUI" },
-  { path: "/analytics", label: "Analytics", icon: "bar-chart-3", title: "Analytics" },
-  { path: "/work-orders", label: "Work orders", icon: "clipboard-list", title: "Work orders" },
+  { path: "/analytics", label: "Analytics", icon: "chartBar", title: "Analytics" },
+  { path: "/work-orders", label: "Work orders", icon: "clipboardList", title: "Work orders" },
   { path: "/customers", label: "Customers", icon: "users", title: "Customers" },
   { path: "/data-table", label: "Data table", icon: "table", title: "Data table" },
   { path: "/settings", label: "Settings", icon: "settings", title: "Settings" },
@@ -152,7 +152,7 @@ const serviceRecordColumns = [
               <section class="hero-page" aria-labelledby="home-title">
                 <div class="hero-copy">
                   <corva-stack gap="lg">
-                    <corva-badge tone="success">All regions operational</corva-badge>
+                    <corva-badge tone="info">Demo systems nominal</corva-badge>
                     <corva-typography id="home-title" as="h1" variant="display">Infrastructure decisions before incidents become outages.</corva-typography>
                     <p>SignalGrid brings capacity, response ownership, tenant impact, and executive reporting into one critical-operations workspace powered by CorvaUI.</p>
                     <div class="button-row">
@@ -166,10 +166,10 @@ const serviceRecordColumns = [
                     <img [attr.src]="assetHref('images/signal-server-room.jpg')" alt="Server racks in a monitored critical infrastructure facility" />
                     <figcaption><span>Region 03</span><strong>12.8 MW protected</strong></figcaption>
                   </figure>
-                  <div class="signal-strip" aria-label="Live infrastructure status">
+                  <div class="signal-strip" aria-label="Synthetic infrastructure status">
                     <div><span>Availability</span><strong>99.995%</strong></div>
                     <div><span>Open risks</span><strong>4</strong></div>
-                    <corva-badge tone="success">Live telemetry</corva-badge>
+                    <corva-badge tone="success">Synthetic data</corva-badge>
                   </div>
                 </div>
               </section>
@@ -198,7 +198,7 @@ const serviceRecordColumns = [
             <section *ngSwitchCase="'/analytics'" class="route-page analytics-page">
               <header class="page-heading">
                 <corva-typography as="h1" variant="display">Critical operations command center</corva-typography>
-                <p>Live service posture, capacity, incident risk, tenant impact, and evidence in one decision surface.</p>
+                <p>Current sample posture, capacity, incident risk, tenant impact, and evidence in one decision surface.</p>
               </header>
 
               <figure class="analytics-photo">
@@ -241,7 +241,7 @@ const serviceRecordColumns = [
                 </corva-card>
               </section>
 
-              <corva-card eyebrow="Live queue" heading="Route health">
+              <corva-card eyebrow="Sample queue" heading="Route health">
                 <corva-data-grid
                   caption="Open work order queue"
                   [columns]="routeColumns"

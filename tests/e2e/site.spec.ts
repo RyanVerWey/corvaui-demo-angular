@@ -22,6 +22,14 @@ for (const [name, path, content, imageCount] of routes) {
     await page.goto(path, { waitUntil: "networkidle" });
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByText(content, { exact: false }).first()).toBeVisible();
+    if (name === "home") {
+      await expect(page.getByText("Synthetic data", { exact: true })).toBeVisible();
+      if (testInfo.project.name === "mobile") {
+        const mobileLinks = page.locator(".mobile-nav a");
+        await expect(mobileLinks).toHaveCount(7);
+        await expect(mobileLinks.getByText("Work orders", { exact: true })).toBeVisible();
+      }
+    }
     await expect(page.locator(".route-panel img")).toHaveCount(imageCount);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
@@ -36,6 +44,10 @@ for (const [name, path, content, imageCount] of routes) {
     expect(violations).toEqual([]);
     expect(errors).toEqual([]);
     await page.screenshot({ path: testInfo.outputPath(`${name}.png`), fullPage: true });
+    if (name === "home" && testInfo.project.name === "mobile") {
+      await page.locator(".mobile-nav a").getByText("Work orders", { exact: true }).click();
+      await expect(page).toHaveURL(/\/work-orders$/);
+    }
   });
 }
 

@@ -706,6 +706,10 @@ corva-data-grid {
 }
 
 @media (max-width: 680px) {
+  .site-shell {
+    padding-bottom: 9rem;
+  }
+
   .data-grid-scroll {
     width: calc(100vw - 4.5rem);
     max-width: calc(100vw - 4.5rem);
@@ -731,12 +735,17 @@ corva-data-grid {
   }
 
   .mobile-nav a {
+    min-height: 3.75rem;
+    flex-direction: column;
+    gap: var(--corva-space-1);
     min-width: 0;
     white-space: normal;
   }
 
   .mobile-nav span {
-    display: none;
+    display: block;
+    margin-left: 0;
+    line-height: 1.1;
   }
 
   .action-link {
