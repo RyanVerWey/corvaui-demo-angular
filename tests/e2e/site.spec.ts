@@ -22,6 +22,10 @@ for (const [name, path, content, imageCount] of routes) {
     await page.goto(path, { waitUntil: "networkidle" });
     await expect(page.locator("h1").first()).toBeVisible();
     await expect(page.getByText(content, { exact: false }).first()).toBeVisible();
+    const disclosure = page.getByRole("note", { name: "Fictional demo disclosure" });
+    await expect(disclosure).toBeVisible();
+    await expect(disclosure).toContainText("Fictional product demonstration");
+    await expect(disclosure).toContainText("Nothing shown is a customer endorsement or live service.");
     if (name === "home") {
       await expect(page.getByText("Synthetic data", { exact: true })).toBeVisible();
       if (testInfo.project.name === "mobile") {
@@ -33,7 +37,7 @@ for (const [name, path, content, imageCount] of routes) {
     await expect(page.locator(".route-panel img")).toHaveCount(imageCount);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
-    if (name === "data" && testInfo.project.name === "mobile") {
+    if (["data", "customers"].includes(name) && testInfo.project.name === "mobile") {
       const gridScroll = page.locator(".data-grid-scroll");
       await expect(gridScroll).toBeVisible();
       const dimensions = await gridScroll.evaluate((element) => ({ clientWidth: element.clientWidth, scrollWidth: element.scrollWidth }));

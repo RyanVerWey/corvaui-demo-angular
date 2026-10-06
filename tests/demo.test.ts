@@ -18,6 +18,9 @@ describe("Angular showcase integrity", () => {
     expect(source).not.toMatch(/CUSTOM_ELEMENTS_SCHEMA|defineCustomElements/);
     expect(`${source}${workspace}`).not.toMatch(/apexui|@apexui/i);
     expect(source).toContain("priorWeek: 68");
+    expect(source).toContain('aria-label="Fictional demo disclosure"');
+    expect(source).toContain("Nothing shown is a customer endorsement or live service.");
+    expect(source).not.toContain("Trusted across critical environments");
   });
 
   it("keeps seven critical-operations routes and local media", () => {

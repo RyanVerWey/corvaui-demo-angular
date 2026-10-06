@@ -58,6 +58,34 @@ p {
   backdrop-filter: blur(16px);
 }
 
+.demo-disclosure {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--corva-space-3);
+  border-bottom: 1px solid var(--corva-color-border);
+  padding: var(--corva-space-3) clamp(var(--corva-space-4), 4vw, var(--corva-space-7));
+  background: color-mix(in srgb, var(--corva-color-info) 12%, var(--corva-color-surface));
+  color: var(--corva-color-text);
+  text-align: center;
+}
+
+.demo-disclosure strong {
+  flex: 0 0 auto;
+  color: var(--corva-color-info);
+  font-size: var(--corva-font-size-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.demo-disclosure span {
+  max-width: 76rem;
+  color: var(--corva-color-muted);
+  font-size: var(--corva-font-size-sm);
+  line-height: var(--corva-font-line-height-relaxed);
+}
+
 .brand-lockup,
 .brand-mark,
 .primary-nav,
@@ -706,6 +734,13 @@ corva-data-grid {
 }
 
 @media (max-width: 680px) {
+  .demo-disclosure {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--corva-space-1);
+    text-align: left;
+  }
+
   .site-shell {
     padding-bottom: 9rem;
   }

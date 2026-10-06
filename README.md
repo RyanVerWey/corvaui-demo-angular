@@ -1,6 +1,6 @@
 # CorvaUI Angular Demo
 
-Public Vercel demo for CorvaUI in Angular.
+Public Vercel demo for CorvaUI in Angular. SignalGrid is a fictional product scenario: its organizations, people, metrics, records, and operational states are synthetic examples, not customer endorsements or a live service.
 
 This app uses explicit standalone components from `@corvaui/angular` with CorvaUI Concept tokens. Its regression tests reject `CUSTOM_ELEMENTS_SCHEMA` and manual custom-element loader fallbacks.
 It demonstrates the CorvaUI Concept token family inside a routed mock operations website with home,
