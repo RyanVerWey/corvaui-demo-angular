@@ -12,9 +12,15 @@ describe("Angular showcase integrity", () => {
     expect(pkg.dependencies["@corvaui/web-components"]).toBeUndefined();
     expect(source).toContain('from "@corvaui/angular"');
     expect(source).toContain("CorvaDataGrid");
+    expect(source).toContain('icon: "chartBar"');
+    expect(source).toContain('icon: "clipboardList"');
+    expect(source).not.toMatch(/bar-chart-3|clipboard-list/);
     expect(source).not.toMatch(/CUSTOM_ELEMENTS_SCHEMA|defineCustomElements/);
     expect(`${source}${workspace}`).not.toMatch(/apexui|@apexui/i);
     expect(source).toContain("priorWeek: 68");
+    expect(source).toContain('aria-label="Fictional demo disclosure"');
+    expect(source).toContain("Nothing shown is a customer endorsement or live service.");
+    expect(source).not.toContain("Trusted across critical environments");
   });
 
   it("keeps seven critical-operations routes and local media", () => {

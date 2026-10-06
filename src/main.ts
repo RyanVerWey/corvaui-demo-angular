@@ -39,8 +39,8 @@ type SwitchEvent = CustomEvent<{ checked: boolean }>;
 
 const routes: Array<{ path: RoutePath; label: string; icon: string; title: string }> = [
   { path: "/", label: "Home", icon: "home", title: "CorvaUI" },
-  { path: "/analytics", label: "Analytics", icon: "bar-chart-3", title: "Analytics" },
-  { path: "/work-orders", label: "Work orders", icon: "clipboard-list", title: "Work orders" },
+  { path: "/analytics", label: "Analytics", icon: "chartBar", title: "Analytics" },
+  { path: "/work-orders", label: "Work orders", icon: "clipboardList", title: "Work orders" },
   { path: "/customers", label: "Customers", icon: "users", title: "Customers" },
   { path: "/data-table", label: "Data table", icon: "table", title: "Data table" },
   { path: "/settings", label: "Settings", icon: "settings", title: "Settings" },
@@ -143,6 +143,11 @@ const serviceRecordColumns = [
         </div>
       </header>
 
+      <aside class="demo-disclosure" role="note" aria-label="Fictional demo disclosure">
+        <strong>Fictional product demonstration</strong>
+        <span>SignalGrid, its organizations, people, metrics, records, and operational states are synthetic examples. Nothing shown is a customer endorsement or live service.</span>
+      </aside>
+
       <div class="route-shell">
         <section class="route-panel" [attr.aria-label]="activeLabel + ' page'">
           <corva-breadcrumbs [items]="breadcrumbs"></corva-breadcrumbs>
@@ -152,7 +157,7 @@ const serviceRecordColumns = [
               <section class="hero-page" aria-labelledby="home-title">
                 <div class="hero-copy">
                   <corva-stack gap="lg">
-                    <corva-badge tone="success">All regions operational</corva-badge>
+                    <corva-badge tone="info">Fictional demo · systems nominal</corva-badge>
                     <corva-typography id="home-title" as="h1" variant="display">Infrastructure decisions before incidents become outages.</corva-typography>
                     <p>SignalGrid brings capacity, response ownership, tenant impact, and executive reporting into one critical-operations workspace powered by CorvaUI.</p>
                     <div class="button-row">
@@ -164,22 +169,22 @@ const serviceRecordColumns = [
                 <div class="hero-visual">
                   <figure class="hero-photo">
                     <img [attr.src]="assetHref('images/signal-server-room.jpg')" alt="Server racks in a monitored critical infrastructure facility" />
-                    <figcaption><span>Region 03</span><strong>12.8 MW protected</strong></figcaption>
+                    <figcaption><span>Fictional Region 03</span><strong>Illustrative 12.8 MW</strong></figcaption>
                   </figure>
-                  <div class="signal-strip" aria-label="Live infrastructure status">
+                  <div class="signal-strip" aria-label="Synthetic infrastructure status">
                     <div><span>Availability</span><strong>99.995%</strong></div>
                     <div><span>Open risks</span><strong>4</strong></div>
-                    <corva-badge tone="success">Live telemetry</corva-badge>
+                    <corva-badge tone="success">Synthetic data</corva-badge>
                   </div>
                 </div>
               </section>
 
-              <section class="trust-band" aria-label="Customer proof">
-                <span>Trusted across critical environments</span>
-                <strong>Kentro Federal</strong>
-                <strong>Northstar Cloud</strong>
-                <strong>Meridian Health</strong>
-                <strong>Atlas Research</strong>
+              <section class="trust-band" aria-label="Fictional organization examples">
+                <span>Fictional organization examples</span>
+                <strong>Federal operations scenario</strong>
+                <strong>Cloud operations scenario</strong>
+                <strong>Health operations scenario</strong>
+                <strong>Research operations scenario</strong>
               </section>
 
               <section class="story-grid">
@@ -198,7 +203,7 @@ const serviceRecordColumns = [
             <section *ngSwitchCase="'/analytics'" class="route-page analytics-page">
               <header class="page-heading">
                 <corva-typography as="h1" variant="display">Critical operations command center</corva-typography>
-                <p>Live service posture, capacity, incident risk, tenant impact, and evidence in one decision surface.</p>
+                <p>Current sample posture, capacity, incident risk, tenant impact, and evidence in one decision surface.</p>
               </header>
 
               <figure class="analytics-photo">
@@ -241,7 +246,7 @@ const serviceRecordColumns = [
                 </corva-card>
               </section>
 
-              <corva-card eyebrow="Live queue" heading="Route health">
+              <corva-card eyebrow="Sample queue" heading="Route health">
                 <corva-data-grid
                   caption="Open work order queue"
                   [columns]="routeColumns"
@@ -257,7 +262,7 @@ const serviceRecordColumns = [
             <section *ngSwitchCase="'/customers'" class="route-page customers-page">
               <header class="page-heading">
                 <corva-typography as="h1" variant="display">Account pipeline and health records</corva-typography>
-                <p>A customer operations page with searchable records, structured data, and next-best action states.</p>
+                <p>A fictional customer-operations scenario with synthetic searchable records, values, and next-best action states.</p>
               </header>
 
               <corva-toolbar label="Customer tools" density="comfortable" wrap>
@@ -268,15 +273,17 @@ const serviceRecordColumns = [
 
               <section class="split-grid wide-left">
                 <corva-card eyebrow="Pipeline" heading="Priority accounts">
-                  <corva-data-grid
-                    caption="Priority customer accounts"
-                    [columns]="customerColumns"
-                    [rows]="customerRows"
-                    sortable
-                    filterable
-                    pageable
-                    page-size="4"
-                  ></corva-data-grid>
+                  <div class="data-grid-scroll">
+                    <corva-data-grid
+                      caption="Priority customer accounts"
+                      [columns]="customerColumns"
+                      [rows]="customerRows"
+                      sortable
+                      filterable
+                      pageable
+                      page-size="4"
+                    ></corva-data-grid>
+                  </div>
                 </corva-card>
                 <corva-card eyebrow="Selected account" heading="Granite Ridge Health">
                   <corva-stack gap="md">
@@ -397,7 +404,7 @@ const serviceRecordColumns = [
               <header class="page-heading">
                 <corva-badge tone="info">About the demo</corva-badge>
                 <corva-typography as="h1" variant="display">Angular plus CorvaUI</corva-typography>
-                <p>This mock website uses shipped CorvaUI tokens and generated standalone wrappers inside Angular, shaped as a real operations product.</p>
+                <p>This fictional website uses shipped CorvaUI tokens and generated standalone wrappers inside Angular, shaped as a simulated operations product.</p>
               </header>
 
               <section class="feature-grid">
@@ -414,8 +421,8 @@ const serviceRecordColumns = [
                 <corva-card eyebrow="Empty state" heading="No blocked migrations">
                   <corva-empty-state
                     icon="check-circle"
-                    heading="Ready for review"
-                    description="The demo deploy proves Concept tokens and Angular rendering against Vercel."
+                    heading="Review scenario"
+                    description="The production build demonstrates Concept tokens and Angular rendering in a fictional routed interface."
                     action-label="View analytics"
                   ></corva-empty-state>
                 </corva-card>
@@ -428,7 +435,7 @@ const serviceRecordColumns = [
       <footer class="site-footer">
         <div>
           <strong>SignalGrid by CorvaUI</strong>
-          <span>Angular critical-operations demo built with Concept tokens and CorvaUI standalone wrappers.</span>
+          <span>Fictional Angular operations demo built with Concept tokens and CorvaUI standalone wrappers.</span>
         </div>
         <nav aria-label="Footer navigation">
           <button type="button" (click)="go('/analytics')">Operations</button>
@@ -455,13 +462,13 @@ class AppComponent {
     { eyebrow: "Today", heading: "Open work", value: "128", label: "Assigned before noon", progress: 76 },
     { eyebrow: "SLA", heading: "Arrival promise", value: "94%", label: "On-time window", progress: 94 },
     { eyebrow: "Parts", heading: "Ready kits", value: "84%", label: "Critical kits staged", progress: 84 },
-    { eyebrow: "Revenue", heading: "Protected work", value: "$311K", label: "At-risk value covered", progress: 71 }
+    { eyebrow: "Scenario value", heading: "Illustrative work", value: "$311K", label: "Synthetic at-risk value", progress: 71 }
   ];
 
   proofCards = [
     { eyebrow: "Tokens", heading: "Concept theme", copy: "Light and dark modes come from the CorvaUI Concept token family.", status: "concept", tone: "info" },
     { eyebrow: "Angular", heading: "Standalone wrappers", copy: "Angular imports CorvaUI's generated standalone component directives.", status: "rendering", tone: "success" },
-    { eyebrow: "Product UI", heading: "Real site shape", copy: "Pages model home, analytics, work orders, customers, data table, settings, and about.", status: "routed", tone: "success" }
+    { eyebrow: "Product UI", heading: "Realistic site shape", copy: "Fictional pages model home, analytics, work orders, customers, data table, settings, and about.", status: "routed", tone: "success" }
   ];
 
   constructor() {

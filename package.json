@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ng serve --host 127.0.0.1",
     "build": "ng build",
+    "preview": "vite preview --host 127.0.0.1 --outDir dist/corvaui-demo-angular/browser",
     "test:unit": "vitest run tests/demo.test.ts",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run build && npm run test:e2e"
