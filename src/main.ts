@@ -215,7 +215,7 @@ const serviceRecordColumns = [
 
               <section class="dashboard-visual-grid">
                 <corva-card eyebrow="Dispatch" heading="Dispatch health">
-                  <corva-chart label="Weekly dispatch completion" [data]="dispatchChart"></corva-chart>
+                  <corva-chart label="Weekly dispatch completion" type="line" [data]="dispatchChart" [series]="dispatchSeries"></corva-chart>
                 </corva-card>
                 <corva-card eyebrow="Capacity" heading="Regional load">
                   <corva-chart label="Regional scheduled capacity" [data]="coverageChart"></corva-chart>
@@ -491,11 +491,17 @@ class AppComponent {
   ];
 
   dispatchChart: any[] = [
-    { label: "Mon", value: 72 },
-    { label: "Tue", value: 84 },
-    { label: "Wed", value: 91 },
-    { label: "Thu", value: 78 },
-    { label: "Fri", value: 88 }
+    { label: "Mon", completed: 72, target: 80, priorWeek: 68 },
+    { label: "Tue", completed: 84, target: 82, priorWeek: 76 },
+    { label: "Wed", completed: 91, target: 86, priorWeek: 81 },
+    { label: "Thu", completed: 78, target: 84, priorWeek: 74 },
+    { label: "Fri", completed: 88, target: 88, priorWeek: 79 }
+  ];
+
+  dispatchSeries: any[] = [
+    { key: "completed", label: "Completed", color: "var(--corva-color-chart-series-1)" },
+    { key: "target", label: "Target", color: "var(--corva-color-chart-series-4)" },
+    { key: "priorWeek", label: "Prior week", color: "var(--corva-color-chart-series-5)" }
   ];
 
   coverageChart: any[] = [

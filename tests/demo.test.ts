@@ -17,6 +17,7 @@ describe("Angular showcase integrity", () => {
     expect(source).not.toMatch(/bar-chart-3|clipboard-list/);
     expect(source).not.toMatch(/CUSTOM_ELEMENTS_SCHEMA|defineCustomElements/);
     expect(`${source}${workspace}`).not.toMatch(/apexui|@apexui/i);
+    expect(source).toContain("priorWeek: 68");
   });
 
   it("keeps seven critical-operations routes and local media", () => {
